@@ -9,7 +9,7 @@ async function getPlayerHeight(){
     while(playerGenPicture.firstChild){ 
         playerGenPicture.removeChild(playerGenPicture.firstChild);               
     }
-    const response = await fetch ("http://data.nba.net/data/10s/prod/v1/2020/players.json");
+    const response = await fetch ("https://data.nba.net/data/10s/prod/v1/2020/players.json");
     const data = await response.json();
     console.log(data.league.standard);
     let randomPlayer=data.league.standard[Math.floor(Math.random()*data.league.standard.length)];
@@ -21,8 +21,6 @@ async function getPlayerHeight(){
     image.setAttribute('src', url);
     playerGenPicture.appendChild(image)
     playerGen.innerText= randomPlayer.lastName;
-
-
 
 }
 
