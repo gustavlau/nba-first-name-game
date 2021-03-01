@@ -1,3 +1,53 @@
 .player-gen {
     padding-top:10px;
 }
+
+.main-grid-layout{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 50px 50px 50px 50px;
+    grid-template-areas:
+    "choice1 player-gen"
+    "choice2 player-gen-pic"
+    "choice3 player-gen-pic"
+    "choice4 player-gen-pic";
+    gap: 5px;
+
+}
+
+.choice-style {
+    align-self: center;
+    /* border:1px solid black; */
+}
+
+#choice-1{
+    grid-area: choice1;
+}
+
+#choice-2{
+    grid-area: choice2;
+}
+
+#choice-3{
+    grid-area: choice3;
+}
+
+#choice-4{
+    grid-area: choice4;
+}
+
+.multiple-choice div{
+    border: 1px black solid;
+    height: 50px;
+    width: 500px;
+}
+
+.player-gen {
+    grid-area: player-gen;
+    justify-self: center;
+}
+
+.player-gen-picture{
+    grid-area: player-gen-pic;
+    justify-self: center;
+}
