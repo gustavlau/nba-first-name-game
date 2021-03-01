@@ -7,8 +7,6 @@ let choice3 = document.getElementById('choice-3');
 let choice4 = document.getElementById('choice-4');
 
 async function generatePlayer(){
-    // event.preventDefault(); 
-    // const name = document.querySelector('input[name="name"]').value;
     while(playerGenPicture.firstChild){ 
         playerGenPicture.removeChild(playerGenPicture.firstChild);               
     }
@@ -17,29 +15,30 @@ async function generatePlayer(){
     let fullPlayerArr=data.league.standard    
     shufflePlayersArr(fullPlayerArr);
     console.log(shufflePlayersArr(fullPlayerArr));
-    let fourChoice = [fullPlayerArr[0],fullPlayerArr[1], fullPlayerArr[2], fullPlayerArr[3]];
-    console.log(fourChoice);
+    let fourChoices = [fullPlayerArr[0],fullPlayerArr[1], fullPlayerArr[2], fullPlayerArr[3]];
+    console.log(fourChoices);
 
-    choice1.innerText = fourChoice[0].firstName;
-    choice2.innerText = fourChoice[1].firstName;
-    choice3.innerText = fourChoice[2].firstName;
-    choice4.innerText = fourChoice[3].firstName;
-    let randomPlayer=fourChoice[Math.floor(Math.random()*fourChoice.length)];
-    console.log(randomPlayer);    
+    choice1.innerText = fourChoices[0].firstName;
+    choice2.innerText = fourChoices[1].firstName;
+    choice3.innerText = fourChoices[2].firstName;
+    choice4.innerText = fourChoices[3].firstName;
+
+    let randomPlayer=fourChoices[Math.floor(Math.random()*fourChoices.length)];
+    // console.log(fourChoices.indexOf(randomPlayer));
     let playerId=randomPlayer.personId
     // console.log(playerId);
     const image = document.createElement('img');
     const url = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerId}.png`
     image.setAttribute('src', url);
-    playerGenPicture.appendChild(image)
+    playerGenPicture.appendChild(image);
     playerGen.innerText= randomPlayer.lastName;
     correctPlayerName= randomPlayer.firstName;
-    return correctPlayerName;
+    console.log(correctPlayerName);
 }
 
 function shufflePlayersArr(arr){
     let j, x, index;
-    for (index = arr.length -1; index >0; index--){
+    for (index = arr.length -1; index > 0; index--){
         j = Math.floor(Math.random()*(index+1));
         x = arr[index];
         arr[index] = arr[j];
@@ -48,11 +47,63 @@ function shufflePlayersArr(arr){
     return arr;
 }
 
-function correctPlayer(player, selection){
-    if (player === selection){
-        console.log("Correct!");
-        generatePlayer();
-    }
+generatePlayer();
+
+choice1.addEventListener('click', multipleChoiceTarget);
+choice2.addEventListener('click', multipleChoiceTarget);
+choice3.addEventListener('click', multipleChoiceTarget);
+choice4.addEventListener('click', multipleChoiceTarget);
+
+let scoreTrackerCorrect = document.getElementById('score-correct');
+let scoreCorrect = 0;
+
+let scoreTrackerIncorrect = document.getElementById('score-incorrect');
+let scoreIncorrect = 0;
+
+let gamesPlayedTracker=document.getElementById('score-totals');
+let gamesPlayed = 0;
+
+function resetStyles(){
+    choice1.style.cssText="";
+    choice2.style.cssText="";
+    choice3.style.cssText="";
+    choice4.style.cssText="";
 }
 
-let  generateButton = document.getElementById('generate-player').addEventListener('click', generatePlayer)
+let timeCheck=false;
+function multipleChoiceTarget(e){  
+    
+    let clickedPlayer = e.target;
+
+    if(clickedPlayer.innerText === correctPlayerName && !timeCheck){  
+        timeCheck = true;
+         clickedPlayer.style.backgroundColor="green";
+         setTimeout(function(){
+            scoreCorrect++;
+            scoreTrackerCorrect.innerHTML="Correct:"+scoreCorrect;
+            gamesPlayed++;
+            gamesPlayedTracker.innerHTML="Games Played:"+gamesPlayed;
+            timeCheck = false;
+            resetStyles();
+            generatePlayer();
+            
+        }, 1000);
+        
+
+    } else if(!timeCheck) {
+        clickedPlayer.style.backgroundColor="red";
+        timeCheck = true;
+        setTimeout(function(){
+            scoreIncorrect++;
+            scoreTrackerIncorrect.innerHTML="Incorrect:"+scoreIncorrect;
+            gamesPlayed++;
+            gamesPlayedTracker.innerHTML="Games Played:"+gamesPlayed;
+            timeCheck = false;
+            resetStyles();
+            generatePlayer();
+        },1000);
+
+    }
+
+}
+
