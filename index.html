@@ -14,7 +14,7 @@
     <p>Instructions:</p>
     <p>A random current NBA Player will be generated with their picture and last name provided. Your goal is to correctly guess their first name</p>
     <div class="main-game">
-        <button id="generate-player">Generate Player</button>
+        <!-- <button id="generate-player">Generate Player</button> -->
         
         <div class="main-grid-layout">
             <div class="choice-style" id="choice-1">Player 1</div>
@@ -24,7 +24,12 @@
             <div class="player-gen"></div>
             <div class="player-gen-picture"></div>
         </div>
-        
+        <container class="score-board">
+            <div class="score-style" id="score-correct">Correct: 0</div> 
+            <div class="score-style" id="score-incorrect">Incorrect: 0</div> 
+            <div class="score-style" id="score-totals">Games Played: 0</div> 
+        </container>
+               
     </div> 
     <script src="script.js"></script>   
 </body>
