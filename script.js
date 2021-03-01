@@ -12,10 +12,18 @@ async function generatePlayer(){
     }
     const response = await fetch ("https://data.nba.net/data/10s/prod/v1/2020/players.json");
     const data = await response.json();
-    let fullPlayerArr=data.league.standard    
-    shufflePlayersArr(fullPlayerArr);
-    console.log(shufflePlayersArr(fullPlayerArr));
-    let fourChoices = [fullPlayerArr[0],fullPlayerArr[1], fullPlayerArr[2], fullPlayerArr[3]];
+    
+    let fullPlayerArr=data.league.standard
+    for(i=0; i<fullPlayerArr.length; i++){
+        if(fullPlayerArr[i].isActive===false){
+            delete fullPlayerArr[i];
+        }
+    }
+    let filteredArr = fullPlayerArr.filter(Boolean);
+    console.log(filteredArr);
+    
+    shufflePlayersArr(filteredArr);
+    let fourChoices = [filteredArr[0],filteredArr[1], filteredArr[2], filteredArr[3]];
     console.log(fourChoices);
 
     choice1.innerText = fourChoices[0].firstName;
