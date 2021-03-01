@@ -4,7 +4,7 @@
 
 .main-grid-layout{
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 50px 50px 50px 50px;
     grid-template-areas:
     "choice1 player-gen"
@@ -17,11 +17,24 @@
 
 .choice-style {
     align-self: center;
-    /* border:1px solid black; */
+    border:1px solid black;
+    height: 50px;
+    width: 100%;
+    display:flex;
+    align-items: center;
+    padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+.choice-style:hover{
+    background-color:blueviolet;
+    cursor: pointer;
+    color: white;
+}
+
+
 #choice-1{
-    grid-area: choice1;
+    grid-area: choice1;   
 }
 
 #choice-2{
@@ -36,12 +49,6 @@
     grid-area: choice4;
 }
 
-.multiple-choice div{
-    border: 1px black solid;
-    height: 50px;
-    width: 500px;
-}
-
 .player-gen {
     grid-area: player-gen;
     justify-self: center;
@@ -50,4 +57,17 @@
 .player-gen-picture{
     grid-area: player-gen-pic;
     justify-self: center;
+}
+
+.score-style{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+}
+
+.score-board {
+    margin-top: 20px;
+    display:flex;    
 }
