@@ -2,6 +2,7 @@ let playerGen = document.querySelector('.player-gen');
 let playerGenPicture = document.querySelector('.player-gen-picture');
 let playerGenDesc = document.querySelector('.player-gen-desc');
 let correctPlayerName = "";
+let correctPlayerFullName = "";
 let choice1 = document.getElementById('choice-1');
 let choice2 = document.getElementById('choice-2');
 let choice3 = document.getElementById('choice-3');
@@ -9,7 +10,7 @@ let choice4 = document.getElementById('choice-4');
 let switchName = document.getElementById('switch-name');
 let switchImg = document.getElementById('switch-img');
 let switchDesc = document.getElementById('switch-desc');
-let test = true;
+let wrongAnswers = document.querySelector('.wrong-answers');
 
 async function generatePlayer(){
     while(playerGenPicture.firstChild){ 
@@ -25,7 +26,7 @@ async function generatePlayer(){
         }
     }
     let filteredArr = fullPlayerArr.filter(Boolean);
-    console.log(filteredArr);
+    // console.log(filteredArr);
     
     shufflePlayersArr(filteredArr);
     let fourChoices = [filteredArr[0],filteredArr[1], filteredArr[2], filteredArr[3]];
@@ -47,8 +48,9 @@ async function generatePlayer(){
     // switcher(convertTeamId);
     playerGen.innerText= randomPlayer.lastName;
     playerGenDesc.innerText = "This player is a " + randomPlayer.heightFeet +"'"+ randomPlayer.heightInches+"\"\ "+randomPlayer.weightPounds+"lbs "+ randomPlayer.teamSitesOnly.posFull+" on the "+ switcher(convertTeamId);  
-    correctPlayerName= randomPlayer.firstName;
-    console.log(correctPlayerName);
+    correctPlayerName = randomPlayer.firstName;
+    correctPlayerFullName = randomPlayer.firstName+" "+randomPlayer.lastName;
+    // console.log(correctPlayerName);
 }
 
 switchName.addEventListener('change', switchNameTog);
@@ -57,8 +59,8 @@ switchDesc.addEventListener('change', switchDescTog);
 
 function switchNameTog (){
     if(switchName.checked){
-        playerGen.style.display="block";
-        playerGenDesc.style.display="none";
+        playerGen.style.display="flex";
+        // playerGenDesc.style.display="none";
     } else {
         playerGen.style.display="none";
     }
@@ -66,8 +68,8 @@ function switchNameTog (){
 
 function switchImgTog (){
     if(switchImg.checked){
-        playerGenPicture.style.display="block";
-        playerGenDesc.style.display="none";
+        playerGenPicture.style.display="flex";
+        // playerGenDesc.style.display="none";
     } else {
         playerGenPicture.style.display="none";
     }
@@ -75,9 +77,9 @@ function switchImgTog (){
 
 function switchDescTog(){
     if(switchDesc.checked){
-        // playerGenPicture.style.display="none";
-        // playerGen.style.display="none";
-        playerGenDesc.style.display="block";
+        playerGenDesc.style.display="flex";
+    } else {
+        playerGenDesc.style.display="none";
     }
 
 }
@@ -93,10 +95,6 @@ function shufflePlayersArr(arr){
         arr[j]=x;
     }
     return arr;
-}
-
-function fillTeamId(team){
-    
 }
 
 generatePlayer();
@@ -146,6 +144,9 @@ function multipleChoiceTarget(e){
     } else if(!timeCheck) {
         clickedPlayer.style.backgroundColor="red";
         clickedPlayer.style.color="white";
+        let wrongAnswersList = document.createElement("li");
+        wrongAnswers.appendChild(wrongAnswersList);
+        wrongAnswersList.innerHTML=correctPlayerFullName;
         timeCheck = true;
         setTimeout(function(){
             scoreIncorrect++;
@@ -160,6 +161,7 @@ function multipleChoiceTarget(e){
     }
 
 }
+
 
 
 //function converts the teamId data in the jason file into a usable "teamName" string
