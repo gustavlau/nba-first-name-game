@@ -5,14 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NBA First Name Game</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
     <link href="main.css" rel="stylesheet">
 </head>
 <body>
+    <!-- <div class="switch">
+        <input class="switch-input" id="nba-nhl-switch" type="checkbox" name="exampleSwitch">
+        <label class="switch-paddle" for="nba-nhl-switch">
+          <span class="show-for-sr">Switch between NBA and NHL</span>
+        </label>
+    </div> -->
     <h1>NBA First Name Game</h1>
     <p>Inspired by this video of Shaq basically proving he doesn't watch any games as an analyst!</p>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/BNoshBPFrEs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <!-- <div class="responsive-embed widescreen">
+        <iframe src="https://www.youtube.com/embed/BNoshBPFrEs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div> -->
     <p>Instructions:</p>
-    <p>A random current NBA Player will be generated with their picture and last name provided. Your goal is to correctly guess their first name</p>
+    <p>A random current NBA Player will be generated with their picture and last name provided. Your goal is to correctly guess their first name. You can increase your difficulty by toggeling their picture and/or name off.</p>
     <div class="main-game">
         <!-- <button id="generate-player">Generate Player</button> -->
         
@@ -21,8 +30,34 @@
             <div class="choice-style" id="choice-2">Player 2</div>
             <div class="choice-style" id="choice-3">Player 3</div>
             <div class="choice-style" id="choice-4">Player 4</div>
-            <div class="player-gen"></div>
-            <div class="player-gen-picture"></div>
+            <div class="player-group-main">
+                <div class="player-gen"></div>
+                <div class="player-gen-picture"></div>
+                <div class="player-gen-desc" style="display: none"></div>
+            </div>
+            <div class="options">
+                Name
+                <div class="switch">
+                    <input class="switch-input" checked id="switch-name" type="checkbox" name="exampleSwitch">
+                    <label class="switch-paddle" for="switch-name">
+                      <span class="show-for-sr">Show Player Name</span>    
+                    </label>
+                  </div>
+                  Picture
+                  <div class="switch">
+                    <input class="switch-input" checked id="switch-img" type="checkbox" name="exampleSwitch">
+                    <label class="switch-paddle" for="switch-img">
+                      <span class="show-for-sr">Show Player Picture</span>
+                    </label>
+                  </div>
+                  Description
+                  <div class="switch">
+                    <input class="switch-input" id="switch-desc" type="checkbox" name="exampleSwitch">
+                    <label class="switch-paddle" for="switch-desc">
+                      <span class="show-for-sr">Show Player Info</span>
+                    </label>
+                  </div>
+            </div>
         </div>
         <container class="score-board">
             <div class="score-style" id="score-correct">Correct: 0</div> 
@@ -30,7 +65,8 @@
             <div class="score-style" id="score-totals">Games Played: 0</div> 
         </container>
                
-    </div> 
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script> -->
     <script src="script.js"></script>   
 </body>
 </html>
