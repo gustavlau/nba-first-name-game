@@ -4,6 +4,7 @@ body {
     font-family: Verdana, sans-serif;
     margin-left: auto;
     margin-right: auto;
+    padding: 20px;
 }
 /* .player-gen {
     padding-top:5px;
@@ -12,7 +13,7 @@ body {
 .main-grid-layout{
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 40px 40px 40px 40px 320px auto;
+    grid-template-rows: 40px 40px 40px 40px auto auto;
     grid-template-areas:
     "choice1"
     "choice2"
@@ -140,7 +141,7 @@ body {
 }
 
 .wrong-answers p {
-    /* padding: 10px; */
+    font-size: 12px;
 }
 
 
