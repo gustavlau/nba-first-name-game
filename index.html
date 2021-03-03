@@ -17,9 +17,9 @@
     </div> -->
     <h1>NBA First Name Game</h1>
     <p>Inspired by this video of Shaq basically proving he doesn't watch any games as an analyst!</p>
-    <!-- <div class="responsive-embed widescreen">
+    <div class="responsive-embed widescreen">
         <iframe src="https://www.youtube.com/embed/BNoshBPFrEs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div> -->
+    </div>
     <p>Instructions:</p>
     <p>A random current NBA Player will be generated with their picture and last name provided. Your goal is to correctly guess their first name. You can increase your difficulty by toggeling their name, picture or description in any combination.</p>
     <div class="main-game">
@@ -36,6 +36,7 @@
                 <div class="player-gen-desc" style="display: none"></div>
             </div>
             <div class="options">
+                <div class="button-group">
                 Name
                 <div class="switch">
                     <input class="switch-input" checked id="switch-name" type="checkbox" name="exampleSwitch">
@@ -43,6 +44,8 @@
                       <span class="show-for-sr">Show Player Name</span>    
                     </label>
                   </div>
+                </div>
+                <div class="button-group">
                   Picture
                   <div class="switch">
                     <input class="switch-input" checked id="switch-img" type="checkbox" name="exampleSwitch">
@@ -50,6 +53,8 @@
                       <span class="show-for-sr">Show Player Picture</span>
                     </label>
                   </div>
+                </div>
+                  <div class="button-group">
                   Description
                   <div class="switch">
                     <input class="switch-input" id="switch-desc" type="checkbox" name="exampleSwitch">
@@ -57,6 +62,7 @@
                       <span class="show-for-sr">Show Player Info</span>
                     </label>
                   </div>
+                </div>
             </div>
         </div>
         <container class="score-board">
