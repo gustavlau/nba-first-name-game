@@ -12,6 +12,10 @@ let switchImg = document.getElementById('switch-img');
 let switchDesc = document.getElementById('switch-desc');
 let wrongAnswers = document.querySelector('.wrong-answers');
 
+// #####################################
+// Main code to asign and generate player
+// #####################################
+
 async function generatePlayer(){
     while(playerGenPicture.firstChild){ 
         playerGenPicture.removeChild(playerGenPicture.firstChild);               
@@ -20,47 +24,55 @@ async function generatePlayer(){
     const data = await response.json();
     
     let fullPlayerArr=data.league.standard
-    for(i=0; i<fullPlayerArr.length; i++){
+    for(i=0; i<fullPlayerArr.length; i++){// Removes as many of the inactive players as possible as they usually don't have pictures
         if(fullPlayerArr[i].isActive===false){
             delete fullPlayerArr[i];
         }
     }
-    let filteredArr = fullPlayerArr.filter(Boolean);
-    // console.log(filteredArr);
+    let filteredArr = fullPlayerArr.filter(Boolean); //cleans out the empty arrays left by the previous removals
     
-    shufflePlayersArr(filteredArr);
-    let fourChoices = [filteredArr[0],filteredArr[1], filteredArr[2], filteredArr[3]];
-    // console.log(fourChoices);
+    shufflePlayersArr(filteredArr); //feeds the new cleaned array into the shuffle function
 
+    let fourChoices = [filteredArr[0],filteredArr[1], filteredArr[2], filteredArr[3]]; //Takes the first four objects in the array and asigns them
+    
     choice1.innerText = fourChoices[0].firstName;
     choice2.innerText = fourChoices[1].firstName;
     choice3.innerText = fourChoices[2].firstName;
     choice4.innerText = fourChoices[3].firstName;
 
-    let randomPlayer=fourChoices[Math.floor(Math.random()*fourChoices.length)];
-    // console.log(fourChoices.indexOf(randomPlayer));
-    let playerId=randomPlayer.personId
+    let randomPlayer=fourChoices[Math.floor(Math.random()*fourChoices.length)]; //random player of the four is the generated player
+   
+    let playerId=randomPlayer.personId //grabs player ID so it can be used in a new template URL that contains their picture
+    
     const image = document.createElement('img');
     const url = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerId}.png`
     image.setAttribute('src', url);
     playerGenPicture.appendChild(image);
-    let convertTeamId = parseInt(randomPlayer.teamId); //converts json teamId into integer to feed into function switcher which takes an int argument
-    // switcher(convertTeamId);
+
+    let convertTeamId = parseInt(randomPlayer.teamId); //converts json teamId (string) into integer to feed into function switcher which takes an int argument
+
     playerGen.innerText= randomPlayer.lastName;
+
     playerGenDesc.innerText = "This player is a " + randomPlayer.heightFeet +"'"+ randomPlayer.heightInches+"\"\ "+randomPlayer.weightPounds+"lbs "+ randomPlayer.teamSitesOnly.posFull+" on the "+ switcher(convertTeamId);  
     correctPlayerName = randomPlayer.firstName;
     correctPlayerFullName = randomPlayer.firstName+" "+randomPlayer.lastName;
-    // console.log(correctPlayerName);
+
 }
+
+generatePlayer();
+
+// ###################
+// Player Options Code
+// ###################
 
 switchName.addEventListener('change', switchNameTog);
 switchImg.addEventListener('change', switchImgTog);
 switchDesc.addEventListener('change', switchDescTog);
 
+
 function switchNameTog (){
     if(switchName.checked){
         playerGen.style.display="flex";
-        // playerGenDesc.style.display="none";
     } else {
         playerGen.style.display="none";
     }
@@ -69,7 +81,6 @@ function switchNameTog (){
 function switchImgTog (){
     if(switchImg.checked){
         playerGenPicture.style.display="flex";
-        // playerGenDesc.style.display="none";
     } else {
         playerGenPicture.style.display="none";
     }
@@ -81,23 +92,14 @@ function switchDescTog(){
     } else {
         playerGenDesc.style.display="none";
     }
-
 }
 
 
 
-function shufflePlayersArr(arr){
-    let j, x, index;
-    for (index = arr.length -1; index > 0; index--){
-        j = Math.floor(Math.random()*(index+1));
-        x = arr[index];
-        arr[index] = arr[j];
-        arr[j]=x;
-    }
-    return arr;
-}
+// #####################################
+// Tracking user target click and scores
+// #####################################
 
-generatePlayer();
 
 choice1.addEventListener('click', multipleChoiceTarget);
 choice2.addEventListener('click', multipleChoiceTarget);
@@ -113,6 +115,7 @@ let scoreIncorrect = 0;
 let gamesPlayedTracker=document.getElementById('score-totals');
 let gamesPlayed = 0;
 
+//Resets the green and red colours
 function resetStyles(){
     choice1.style.cssText="";
     choice2.style.cssText="";
@@ -121,50 +124,62 @@ function resetStyles(){
 }
 
 let timeCheck=false;
+
+//Tracks where user clicks and if their answer is right or wrong and adds score accordingly
 function multipleChoiceTarget(e){  
     
     let clickedPlayer = e.target;
 
-    if(clickedPlayer.innerText === correctPlayerName && !timeCheck){  
+    if(clickedPlayer.innerText === correctPlayerName && !timeCheck){   //Matches based on string matching and not array index
         timeCheck = true;
-         clickedPlayer.style.backgroundColor="green";
-         clickedPlayer.style.color="white";
-         setTimeout(function(){
+        clickedPlayer.style.backgroundColor="green";
+        setTimeout(function(){
             scoreCorrect++;
-            scoreTrackerCorrect.innerHTML="Correct:"+scoreCorrect;
+            scoreTrackerCorrect.innerHTML="Correct: "+scoreCorrect;
             gamesPlayed++;
-            gamesPlayedTracker.innerHTML="Games Played:"+gamesPlayed;
+            gamesPlayedTracker.innerHTML="Games Played: "+gamesPlayed;
             timeCheck = false;
             resetStyles();
-            generatePlayer();
-            
-        }, 1000);
+            generatePlayer();            
+        }, 700);
         
 
     } else if(!timeCheck) {
         clickedPlayer.style.backgroundColor="red";
-        clickedPlayer.style.color="white";
-        let wrongAnswersList = document.createElement("li");
+        let wrongAnswersList = document.createElement("p");
         wrongAnswers.appendChild(wrongAnswersList);
         wrongAnswersList.innerHTML=correctPlayerFullName;
         timeCheck = true;
         setTimeout(function(){
             scoreIncorrect++;
-            scoreTrackerIncorrect.innerHTML="Incorrect:"+scoreIncorrect;
+            scoreTrackerIncorrect.innerHTML="Incorrect: "+scoreIncorrect;
             gamesPlayed++;
-            gamesPlayedTracker.innerHTML="Games Played:"+gamesPlayed;
+            gamesPlayedTracker.innerHTML="Games Played: "+gamesPlayed;
             timeCheck = false;
             resetStyles();
             generatePlayer();
-        },1000);
-
+        },700);
     }
 
 }
 
+// ############################################################
+// "Behinds the scenes" Code -> Array Shuffle and teamId matcher
+// ############################################################
 
+//Shuffles the array based on the Fisher-Yates Algorithm
+function shufflePlayersArr(arr){
+    let j, x, index;
+    for (index = arr.length -1; index > 0; index--){
+        j = Math.floor(Math.random()*(index+1));
+        x = arr[index];
+        arr[index] = arr[j];
+        arr[j]=x;
+    }
+    return arr;
+}
 
-//function converts the teamId data in the jason file into a usable "teamName" string
+//function converts the teamId data in the jason file into a usable "teamName" string by matching teamId to the teamName
 function switcher(jsonTeamId){
     let team = [{
         "teamId": 1610612737,
@@ -287,8 +302,7 @@ function switcher(jsonTeamId){
         "teamName": "Washington Wizards",
     }];
 
-    let dataMatch = team[team.map(function(item){return item.teamId;}).indexOf(jsonTeamId)]
-    return dataMatch.teamName;
-
+    let dataMatch = team[team.map(function(item){return item.teamId;}).indexOf(jsonTeamId)] //returns the matching team name based on the team Id
+    return dataMatch.teamName; //return value is used to display the matching team name string
 }
 
