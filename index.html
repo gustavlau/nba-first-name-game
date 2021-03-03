@@ -20,16 +20,16 @@
     <div class="responsive-embed widescreen">
         <iframe src="https://www.youtube.com/embed/BNoshBPFrEs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    <p>Instructions:</p>
+    <h4>How to play</h4>
     <p>A random current NBA Player will be generated with their picture and last name provided. Your goal is to correctly guess their first name. You can increase your difficulty by toggeling their name, picture or description in any combination.</p>
     <div class="main-game">
         <!-- <button id="generate-player">Generate Player</button> -->
         
         <div class="main-grid-layout">
-            <div class="choice-style" id="choice-1">Player 1</div>
-            <div class="choice-style" id="choice-2">Player 2</div>
-            <div class="choice-style" id="choice-3">Player 3</div>
-            <div class="choice-style" id="choice-4">Player 4</div>
+            <div class="choice-style button primary" id="choice-1">Player 1</div>
+            <div class="choice-style button primary" id="choice-2">Player 2</div>
+            <div class="choice-style button primary" id="choice-3">Player 3</div>
+            <div class="choice-style button primary" id="choice-4">Player 4</div>
             <div class="player-group-main">
                 <div class="player-gen"></div>
                 <div class="player-gen-picture"></div>
@@ -66,12 +66,13 @@
             </div>
         </div>
         <container class="score-board">
-            <div class="score-style" id="score-correct">Correct: 0</div> 
-            <div class="score-style" id="score-incorrect">Incorrect: 0</div> 
-            <div class="score-style" id="score-totals">Games Played: 0</div> 
+            <h4 class="score-style" id="score-correct">Correct: 0</h4> 
+            <h4 class="score-style" id="score-incorrect">Incorrect: 0</h4> 
+            <h4 class="score-style" id="score-totals">Rounds Played: 0</h4> 
         </container>
         <container>
-            <div class="wrong-answers">Names Incorrect:</div>
+          <h5 id="wrong-answers-head">Players you get wrong will appear here</h5>
+            <div class="wrong-answers"></div>
         </container>
                
     </div>
