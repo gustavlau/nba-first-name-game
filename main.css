@@ -2,10 +2,12 @@ body {
     max-width: 1000px;
     margin:20px;
     font-family: Verdana, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
 }
-.player-gen {
-    padding-top:10px;
-}
+/* .player-gen {
+    padding-top:5px;
+} */
 
 .main-grid-layout{
     display: grid;
@@ -19,7 +21,7 @@ body {
     "player-main"
     "options";
     gap: 5px;
-    /* overflow-y:hidden; */
+    padding-top: 20px;
 
 }
 
@@ -119,17 +121,35 @@ body {
     display:flex;    
 }
 
-.wrong-answers li{
-    padding-left:10px;
+#score-correct {
+    color: green;
+}
+
+#score-incorrect {
+    color: red;
+}
+
+#score-totals {
+    color: #1779ba;
+}
+
+.wrong-answers {
+    display: flex;
+    flex-direction:column-reverse;
+    flex-wrap:wrap;
+}
+
+.wrong-answers p {
+    /* padding: 10px; */
 }
 
 
 
 @media only screen and (min-width:747px){
     .choice-style:hover{
-        background-color:blueviolet;
+        /* background-color:blueviolet; */
         cursor: pointer;
-        color: white;
+        /* color: white; */
     }
 
     .main-grid-layout{
