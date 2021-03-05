@@ -137,7 +137,7 @@ function multipleChoiceTarget(e){
             scoreCorrect++;
             scoreTrackerCorrect.innerHTML="Correct: "+scoreCorrect;
             gamesPlayed++;
-            gamesPlayedTracker.innerHTML="Games Played: "+gamesPlayed;
+            gamesPlayedTracker.innerHTML="Rounds: "+gamesPlayed;
             timeCheck = false;
             resetStyles();
             generatePlayer();            
@@ -154,7 +154,7 @@ function multipleChoiceTarget(e){
             scoreIncorrect++;
             scoreTrackerIncorrect.innerHTML="Incorrect: "+scoreIncorrect;
             gamesPlayed++;
-            gamesPlayedTracker.innerHTML="Games Played: "+gamesPlayed;
+            gamesPlayedTracker.innerHTML="Rounds: "+gamesPlayed;
             timeCheck = false;
             resetStyles();
             generatePlayer();
