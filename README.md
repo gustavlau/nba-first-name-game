@@ -14,3 +14,5 @@ A picture/name/player description is shown on screen and you have to select from
 * More robust point system - timer based for more points based on speed of choice
 * Better way to capture and display incorrect players
 * Smoother animations and general improvements to UI/UX
+
+Uses Foundation for styling
