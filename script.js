@@ -62,6 +62,32 @@ async function generatePlayer(){
 generatePlayer();
 
 // ###################
+// Timer
+// ###################
+let timer = document.getElementById("timer");
+let min = 0;
+let sec = 0;
+let msec = 0;
+let stopTime = false;
+
+function startTimer(){
+    if (stopTime){
+        console.log("I am now running");
+        min = parseInt(min);
+        sec = parseInt(sec);
+        msec = parseInt(msec);
+
+        msec = msec +1;
+
+        timer.innerHTML = min + ':' + sec + ':' + msec;
+
+        // setTimeout("startTimer()", 10);
+    }
+    
+}
+
+
+// ###################
 // Player Options Code
 // ###################
 
@@ -127,7 +153,8 @@ let timeCheck=false;
 
 //Tracks where user clicks and if their answer is right or wrong and adds score accordingly
 function multipleChoiceTarget(e){  
-    
+    stopTime=true;
+    startTimer();
     let clickedPlayer = e.target;
 
     if(clickedPlayer.innerText === correctPlayerName && !timeCheck){   //Matches based on string matching and not array index
@@ -180,6 +207,7 @@ function shufflePlayersArr(arr){
 }
 
 //function converts the teamId data in the jason file into a usable "teamName" string by matching teamId to the teamName
+//Only the teamId is found in the json file so the data must be matched with the information below to display the actual team name
 function switcher(jsonTeamId){
     let team = [{
         "teamId": 1610612737,

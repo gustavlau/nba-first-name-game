@@ -13,14 +13,16 @@ body {
 .main-grid-layout{
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 40px 40px 40px 40px auto auto;
+    grid-template-rows: 40px 40px 40px 40px auto auto auto;
     grid-template-areas:
+    
     "choice1"
     "choice2"
     "choice3"
     "choice4"
     "player-main"
-    "options";
+    "options"
+    "timer";
     gap: 5px;
     padding-top: 20px;
 
@@ -54,7 +56,11 @@ body {
     
 }
 
-
+#timer{
+    grid-area:timer;
+    justify-self: center;
+    display:flex;
+}
 #choice-1{
     grid-area: choice1;   
 }
@@ -158,6 +164,7 @@ body {
         grid-template-columns: 1fr 1fr auto;
         grid-template-rows: auto auto auto auto;
         grid-template-areas:
+        ". timer ."
         "choice1 player-main options"
         "choice2 player-main options"
         "choice3 player-main options"
