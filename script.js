@@ -65,13 +65,19 @@ generatePlayer();
 // Timer
 // ###################
 let timer = document.getElementById("timer");
-let timeDiff, min, sec, msec;
-let stopTime = false;
+// let timeDiff, min, sec, msec;
+let stopTime = false; //timer trigger
+let elapsedTime = 0;
+let startTime;
+let mSecInterval;
 
 function startTimer(){
     if (stopTime){
-        let getTime = Date.now();
-        console.log(getTime);
+        startTime = Date.now() - elapsedTime;
+        mSecInterval = setInterval(function showTimer(){
+            elapsedTime = Date.now() - startTime;
+            printTime(timeToString(elapsedTime));
+        })
     }
 }
 
@@ -219,7 +225,7 @@ function shufflePlayersArr(arr){
 }
 
 //function converts the teamId data in the jason file into a usable "teamName" string by matching teamId to the teamName
-//Only the teamId is found in the json file so the data must be matched with the information below to display the actual team name
+//Only the teamId is found in the json file so the data must be matched with the information below to display the actual team name instead of the teamId
 function switcher(jsonTeamId){
     let team = [{
         "teamId": 1610612737,
